@@ -17,8 +17,10 @@ import { EnvConfig } from "../types/config-schema";
  */
 export function generateValidator(config: EnvConfig, fileType: string = "js") {
   // main validation function template
+  const header =
+    fileType === "ts" ? `/// <reference path="./env.d.ts" />\n` : "";
   const validationCode = `
-    function validateEnv() {
+    ${header}function validateEnv()${fileType === "ts" ? ": Env" : ""} {
         const errors: string[] = [];
         const env: any = {};
 
@@ -30,7 +32,7 @@ export function generateValidator(config: EnvConfig, fileType: string = "js") {
           throw new Error(\`Environment validation failed:\\n\${errors.join("\\n")}\`);
           }
 
-          return env;
+          return env${fileType === "ts" ? " as unknown as Env" : ""};
     }
     
     ${
