@@ -20,7 +20,7 @@ export function generateValidator(config: EnvConfig, fileType: string = "js") {
   const validationCode = `
     function validateEnv() {
         const errors: string[] = [];
-        const env: Record<string, any> = {};
+        const env: any = {};
 
         ${Object.entries(config)
           .map(([key, config]) => generateValidationForVar(key, config))
@@ -68,7 +68,7 @@ function generateValidationForVar(key: string, config: any): string {
   }
 
   // get raw value from env or use default
-  code += `  const ${key.toLowerCase()}_raw = process.env.${key}${
+  code += `  const ${key.toLowerCase()}_raw: string | undefined = process.env.${key}${
     defaultValue !== undefined ? `  || '${defaultValue}'` : ""
   };\n`;
 
