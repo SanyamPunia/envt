@@ -20,12 +20,21 @@ export async function writeValidationFile(
   writeFileSync(fullPath, formattedContent, "utf-8");
 }
 
-export function writeTypeFile(
+export async function writeTypeFile(
   content: string,
   outputPath: string = "env.d.ts"
-): void {
+): Promise<void> {
   const fullPath = join(process.cwd(), outputPath);
-  writeFileSync(fullPath, content, "utf-8");
+
+  const formattedContent = await format(content, {
+    parser: "typescript",
+    semi: true,
+    singleQuote: false,
+    tabWidth: 2,
+    trailingComma: "es5",
+  });
+
+  writeFileSync(fullPath, formattedContent, "utf-8");
 }
 
 export function readConfigFile(configPath: string): string {

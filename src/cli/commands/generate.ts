@@ -35,7 +35,7 @@ export async function generateCommand(): Promise<void> {
 
     console.log(chalk.blue("📝 Generating TypeScript types..."));
     const typeCode = generateTypes(config);
-    writeTypeFile(typeCode);
+    await writeTypeFile(typeCode);
 
     console.log(chalk.green("✅ Generated files:"));
     console.log(
