@@ -9,7 +9,6 @@ export async function writeValidationFile(
   const outputPath = `env-validation.${fileType}`;
   const fullPath = join(process.cwd(), outputPath);
 
-  // Format the content with Prettier
   const formattedContent = await format(content, {
     parser: fileType === "ts" ? "typescript" : "babel",
     semi: true,
