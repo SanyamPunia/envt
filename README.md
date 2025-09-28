@@ -4,7 +4,7 @@ type-safe **client-side** environment variables with runtime validation
 
 eliminate `process.env.UNDEFINED_VAR` runtime errors and get compile-time safety for your client-side environment variables.
 
-> **⚠️ Client-side only**: This tool focuses on client-side environment variables (NEXT*PUBLIC*_, PUBLIC\__, VITE*\*, REACT_APP*\*). For server-side variables, use Next.js API routes or server components.
+> **⚠️ Client-side only**: This tool focuses on client-side environment variables (NEXT*PUBLIC*\_, PUBLIC\_\_, VITE*\*, REACT_APP*\*). For server-side variables, use Next.js API routes or server components.
 
 ## quick start
 

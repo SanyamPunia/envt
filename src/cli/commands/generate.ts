@@ -31,7 +31,7 @@ export async function generateCommand(): Promise<void> {
 
     console.log(chalk.blue("⚙️  Generating validation function..."));
     const validatorCode = generateValidator(config, fileType);
-    writeValidationFile(validatorCode, fileType);
+    await writeValidationFile(validatorCode, fileType);
 
     console.log(chalk.blue("📝 Generating TypeScript types..."));
     const typeCode = generateTypes(config);

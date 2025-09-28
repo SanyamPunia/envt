@@ -1,13 +1,24 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
+import { format } from "prettier";
 
-export function writeValidationFile(
+export async function writeValidationFile(
   content: string,
   fileType: string = "js"
-): void {
+): Promise<void> {
   const outputPath = `env-validation.${fileType}`;
   const fullPath = join(process.cwd(), outputPath);
-  writeFileSync(fullPath, content, "utf-8");
+
+  // Format the content with Prettier
+  const formattedContent = await format(content, {
+    parser: fileType === "ts" ? "typescript" : "babel",
+    semi: true,
+    singleQuote: false,
+    tabWidth: 2,
+    trailingComma: "es5",
+  });
+
+  writeFileSync(fullPath, formattedContent, "utf-8");
 }
 
 export function writeTypeFile(
