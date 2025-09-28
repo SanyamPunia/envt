@@ -19,8 +19,8 @@ export function generateValidator(config: EnvConfig, fileType: string = "js") {
   // main validation function template
   const validationCode = `
     function validateEnv() {
-        const errors = [];
-        const env = {};
+        const errors: string[] = [];
+        const env: Record<string, any> = {};
 
         ${Object.entries(config)
           .map(([key, config]) => generateValidationForVar(key, config))
