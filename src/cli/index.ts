@@ -21,7 +21,9 @@ program
 program
   .command("generate")
   .description("Generate validation and type files from config")
-  .action(generateCommand);
+  .action(async () => {
+    await generateCommand();
+  });
 
 program
   .command("validate")

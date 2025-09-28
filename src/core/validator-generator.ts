@@ -15,7 +15,7 @@ import { EnvConfig } from "../types/config-schema";
  * @param config - parsed config object
  * @returns generated validation code as string
  */
-export function generateValidator(config: EnvConfig) {
+export function generateValidator(config: EnvConfig, fileType: string = "js") {
   // main validation function template
   const validationCode = `
     function validateEnv() {
@@ -33,7 +33,11 @@ export function generateValidator(config: EnvConfig) {
           return env;
     }
     
-    module.exports = { validateEnv };`;
+    ${
+      fileType === "ts"
+        ? "export { validateEnv };"
+        : "module.exports = { validateEnv };"
+    }`;
 
   return validationCode;
 }

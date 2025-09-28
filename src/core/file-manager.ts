@@ -3,8 +3,9 @@ import { dirname, join } from "path";
 
 export function writeValidationFile(
   content: string,
-  outputPath: string = "env-validation.js"
+  fileType: string = "js"
 ): void {
+  const outputPath = `env-validation.${fileType}`;
   const fullPath = join(process.cwd(), outputPath);
   writeFileSync(fullPath, content, "utf-8");
 }
