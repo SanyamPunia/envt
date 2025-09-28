@@ -1,9 +1,10 @@
 import chalk from "chalk";
 import { writeFile } from "../../core/file-manager";
 
-const templateConfig = `import { EnvConfig } from 'envt/types';
+const templateConfig = `// Environment configuration for envt
+// This file defines your environment variables with types and validation rules
 
-export const config: EnvConfig = {
+export const config = {
   // Required string
   DATABASE_URL: {
     type: "string",
