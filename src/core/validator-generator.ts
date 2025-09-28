@@ -16,6 +16,26 @@ import { EnvConfig } from "../types/config-schema";
  * @returns generated validation code as string
  */
 export function generateValidator(config: EnvConfig, fileType: string = "js") {
+  // detect server-side variables that shouldn't be used client-side
+  const serverSideVars = Object.keys(config).filter(
+    (key) =>
+      !key.startsWith("NEXT_PUBLIC_") &&
+      !key.startsWith("PUBLIC_") &&
+      !key.startsWith("VITE_") &&
+      !key.startsWith("REACT_APP_")
+  );
+
+  if (serverSideVars.length > 0) {
+    throw new Error(
+      `❌ Server-side environment variables detected: ${serverSideVars.join(
+        ", "
+      )}\n` +
+        `These variables are not accessible on the client-side and will cause runtime errors.\n` +
+        `Please use client-side variables only (NEXT_PUBLIC_*, PUBLIC_*, VITE_*, REACT_APP_*).\n` +
+        `For server-side variables, use Next.js API routes or server components instead.`
+    );
+  }
+
   // main validation function template
   const header =
     fileType === "ts" ? `/// <reference path="./env.d.ts" />\n` : "";

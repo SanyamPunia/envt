@@ -1,8 +1,10 @@
 # envt
 
-type-safe environment variables with runtime validation
+type-safe **client-side** environment variables with runtime validation
 
-eliminate `process.env.UNDEFINED_VAR` runtime errors and get compile-time safety for all your environment variables.
+eliminate `process.env.UNDEFINED_VAR` runtime errors and get compile-time safety for your client-side environment variables.
+
+> **⚠️ Client-side only**: This tool focuses on client-side environment variables (NEXT*PUBLIC*_, PUBLIC\__, VITE*\*, REACT_APP*\*). For server-side variables, use Next.js API routes or server components.
 
 ## quick start
 
@@ -25,20 +27,19 @@ npx envt init
 2. **edit config** - customize your `env.config.ts`
 
 ```typescript
-import { EnvConfig } from "envt/types";
-
-export const config: EnvConfig = {
-  DATABASE_URL: {
+export const config = {
+  // Client-side variables only (NEXT_PUBLIC_*, PUBLIC_*, VITE_*, REACT_APP_*)
+  NEXT_PUBLIC_API_URL: {
     type: "string",
     required: true,
-    description: "postgresql connection string",
+    description: "api base url for client requests",
   },
-  PORT: {
+  NEXT_PUBLIC_APP_PORT: {
     type: "number",
     default: 3000,
-    description: "server port",
+    description: "application port",
   },
-  NODE_ENV: {
+  NEXT_PUBLIC_NODE_ENV: {
     type: "enum",
     values: ["development", "production", "test"],
     default: "development",
@@ -60,10 +61,10 @@ import { validateEnv } from "./env-validation.js";
 // this throws if environment is invalid
 const env = validateEnv();
 
-// now you have full type safety
-console.log(env.DATABASE_URL); // string
-console.log(env.PORT); // number
-console.log(env.NODE_ENV); // 'development' | 'production' | 'test'
+// now you have full type safety for client-side variables
+console.log(env.NEXT_PUBLIC_API_URL); // string
+console.log(env.NEXT_PUBLIC_APP_PORT); // number
+console.log(env.NEXT_PUBLIC_NODE_ENV); // 'development' | 'production' | 'test'
 ```
 
 ## cli commands
@@ -80,6 +81,21 @@ console.log(env.NODE_ENV); // 'development' | 'production' | 'test'
 - `boolean` - convert 'true'/'false' strings
 - `enum` - validate against allowed values
 - `json` - parse json strings into objects
+
+## client-side vs server-side
+
+### ✅ client-side variables (supported)
+
+- `NEXT_PUBLIC_*` - Next.js public variables
+- `PUBLIC_*` - SvelteKit public variables
+- `VITE_*` - Vite public variables
+- `REACT_APP_*` - Create React App variables
+
+### ❌ server-side variables (not supported)
+
+- `DATABASE_URL`, `API_SECRET`, `JWT_SECRET`, etc.
+- These are not accessible on the client-side and will cause runtime errors
+- Use Next.js API routes or server components for server-side variables
 
 ## license
 

@@ -2,36 +2,37 @@ import chalk from "chalk";
 import { writeFile } from "../../core/file-manager";
 
 const templateConfig = `// Environment configuration for envt
-// This file defines your environment variables with types and validation rules
+// This file defines your CLIENT-SIDE environment variables with types and validation rules
+// Only use variables that are accessible on the client-side (NEXT_PUBLIC_*, PUBLIC_*, VITE_*, REACT_APP_*)
 
 export const config = {
-  // Required string
-  DATABASE_URL: {
+  // Required string (client-side)
+  NEXT_PUBLIC_API_URL: {
     type: "string",
     required: true,
-    description: "PostgreSQL connection string"
+    description: "API base URL for client requests"
   },
   // Optional with default
-  PORT: {
+  NEXT_PUBLIC_APP_PORT: {
     type: "number",
     default: 3000,
-    description: "Server port"
+    description: "Application port"
   },
   // Enum validation
-  NODE_ENV: {
+  NEXT_PUBLIC_NODE_ENV: {
     type: "enum",
     values: ["development", "production", "test"],
     default: "development",
     description: "Environment mode"
   },
   // Boolean conversion
-  ENABLE_LOGGING: {
+  NEXT_PUBLIC_DEBUG_MODE: {
     type: "boolean",
     default: false,
-    description: "Enable application logging"
+    description: "Enable debug logging"
   },
   // JSON parsing
-  FEATURE_FLAGS: {
+  NEXT_PUBLIC_FEATURE_FLAGS: {
     type: "json",
     required: false,
     description: "JSON object of feature flags"
