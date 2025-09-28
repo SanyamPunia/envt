@@ -1,4 +1,4 @@
-import { EnvConfig } from "../types/config";
+import { EnvConfig } from "../types/config-schema";
 
 /**
  * generate ts declaration file content for the envs

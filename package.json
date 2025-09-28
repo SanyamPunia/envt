@@ -1,6 +1,7 @@
 {
   "name": "env-safe",
   "version": "1.0.0",
+  "description": "Type-safe environment variables with runtime validation",
   "main": "dist/core/index.js",
   "types": "dist/core/index.d.ts",
   "bin": {
@@ -15,13 +16,20 @@
     "test:watch": "tsx tests/run-all.ts --watch",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "environment",
+    "variables",
+    "typescript",
+    "validation",
+    "cli"
+  ],
+  "author": "SanyamPunia",
+  "license": "MIT",
   "devDependencies": {
     "@types/glob": "^8.1.0",
     "@types/node": "^24.3.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "@typescript-eslint/typescript-estree": "^8.44.1",
     "glob": "^11.0.3",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
@@ -32,6 +40,7 @@
   },
   "files": [
     "dist/",
-    "templates/"
+    "templates/",
+    "examples/"
   ]
 }

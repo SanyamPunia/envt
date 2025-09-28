@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
-import { EnvConfig } from "../types/config";
+import { EnvConfig } from "../types/config-schema";
+import { parseConfigFromAST } from "./ast-parser";
 
 /**
  * this is a pragmatic approach for mvp - essentially doing a lightweight
@@ -18,24 +19,8 @@ export function parseConfig(configPath: string = "env.config.ts"): EnvConfig {
     // read the raw file content - we need the string representation
     const configContent = readFileSync(fullPath, "utf-8");
 
-    /**
-     * use regex to find the config export
-     * 1. export const config =
-     * 2. captures everything between the first `{`  and last `}`
-     */
-    const configMatch = configContent.match(
-      /export\s+const\s+config\s*=\s*({[\s\S]*?});/
-    );
-
-    if (!configMatch) {
-      throw new Error("Could not find config export in env.config.ts");
-    }
-
-    // get first captured group and convert to object
-    const configString = configMatch[1];
-
-    // todo - replace with a proper ts parser
-    const config = eval(`(${configString})`);
+    // ast parse that shit
+    const config = parseConfigFromAST(configContent);
 
     return config;
   } catch (error: any) {

@@ -1,4 +1,4 @@
-import { EnvConfig } from "../types/config";
+import { EnvConfig } from "../types/config-schema";
 
 /**
  * generates runtime validation code as a string, essentially a code generator
@@ -18,7 +18,7 @@ import { EnvConfig } from "../types/config";
 export function generateValidator(config: EnvConfig) {
   // main validation function template
   const validationCode = `
-    export function validateEnv() {
+    function validateEnv() {
         const errors = [];
         const env = {};
 
@@ -31,7 +31,9 @@ export function generateValidator(config: EnvConfig) {
           }
 
           return env;
-    }`;
+    }
+    
+    module.exports = { validateEnv };`;
 
   return validationCode;
 }
@@ -49,7 +51,7 @@ function generateValidationForVar(key: string, config: any): string {
   const { type, required = false, default: defaultValue, values } = config;
 
   // comment for the variable
-  // will append to this only
+  // will append to this
   let code = `  // ${key}${
     config.description ? ` - ${config.description}` : ""
   }\n`;

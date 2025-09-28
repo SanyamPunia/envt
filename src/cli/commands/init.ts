@@ -1,39 +1,41 @@
 import chalk from "chalk";
 import { writeFile } from "../../core/file-manager";
 
-const templateConfig = `export const config = {
-    // Required string
-    DATABASE_URL: {
-      type: "string",
-      required: true,
-      description: "PostgreSQL connection string"
-    },
-    // Optional with default
-    PORT: {
-      type: "number",
-      default: 3000,
-      description: "Server port"
-    },
-    // Enum validation
-    NODE_ENV: {
-      type: "enum",
-      values: ["development", "production", "test"],
-      default: "development",
-      description: "Environment mode"
-    },
-    // Boolean conversion
-    ENABLE_LOGGING: {
-      type: "boolean",
-      default: false,
-      description: "Enable application logging"
-    },
-    // JSON parsing
-    FEATURE_FLAGS: {
-      type: "json",
-      required: false,
-      description: "JSON object of feature flags"
-    }
-  };`;
+const templateConfig = `import { EnvConfig } from 'env-safe/types';
+
+export const config: EnvConfig = {
+  // Required string
+  DATABASE_URL: {
+    type: "string",
+    required: true,
+    description: "PostgreSQL connection string"
+  },
+  // Optional with default
+  PORT: {
+    type: "number",
+    default: 3000,
+    description: "Server port"
+  },
+  // Enum validation
+  NODE_ENV: {
+    type: "enum",
+    values: ["development", "production", "test"],
+    default: "development",
+    description: "Environment mode"
+  },
+  // Boolean conversion
+  ENABLE_LOGGING: {
+    type: "boolean",
+    default: false,
+    description: "Enable application logging"
+  },
+  // JSON parsing
+  FEATURE_FLAGS: {
+    type: "json",
+    required: false,
+    description: "JSON object of feature flags"
+  }
+};`;
 
 export function initCommand(): void {
   try {
