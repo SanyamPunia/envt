@@ -1,0 +1,37 @@
+{
+  "name": "env-safe",
+  "version": "1.0.0",
+  "main": "dist/core/index.js",
+  "types": "dist/core/index.d.ts",
+  "bin": {
+    "env-safe": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli/index.ts",
+    "test": "tsx tests/run-all.ts",
+    "test:unit": "tsx tests/run-unit.ts",
+    "test:integration": "tsx tests/run-integration.ts",
+    "test:watch": "tsx tests/run-all.ts --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/node": "^24.3.1",
+    "glob": "^11.0.3",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.0"
+  },
+  "files": [
+    "dist/",
+    "templates/"
+  ]
+}
