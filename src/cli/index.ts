@@ -9,7 +9,7 @@ import chalk from "chalk";
 const program = new Command();
 
 program
-  .name("env-safe")
+  .name("envt")
   .version("1.0.0")
   .description("Type-safe environment variables with runtime validation");
 

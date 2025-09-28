@@ -1,11 +1,11 @@
 {
-  "name": "env-safe",
-  "version": "1.0.0",
+  "name": "envt",
+  "version": "1.0.1",
   "description": "Type-safe environment variables with runtime validation",
   "main": "dist/core/index.js",
   "types": "dist/core/index.d.ts",
   "bin": {
-    "env-safe": "./dist/cli/index.js"
+    "envt": "./dist/cli/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -40,7 +40,6 @@
   },
   "files": [
     "dist/",
-    "templates/",
-    "examples/"
+    "templates/"
   ]
 }

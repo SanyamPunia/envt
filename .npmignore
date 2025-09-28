@@ -1,0 +1,34 @@
+# source files
+src/
+tests/
+*.test.js
+*.test.ts
+
+# development files
+tsconfig.json
+.gitignore
+.npmignore
+
+# example files (too large for npm)
+examples/
+
+# generated files
+env.config.ts
+env-validation.js
+env.d.ts
+demo-*.d.ts
+test-*.js
+
+# logs
+*.log
+npm-debug.log*
+
+# ide files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# os files
+.DS_Store
+Thumbs.db

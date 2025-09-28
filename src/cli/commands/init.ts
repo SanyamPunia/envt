@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { writeFile } from "../../core/file-manager";
 
-const templateConfig = `import { EnvConfig } from 'env-safe/types';
+const templateConfig = `import { EnvConfig } from 'envt/types';
 
 export const config: EnvConfig = {
   // Required string
@@ -45,7 +45,7 @@ export function initCommand(): void {
       chalk.blue("📝 Edit the config file to match your environment variables")
     );
     console.log(
-      chalk.blue('🚀 Run "npx env-safe generate" to create validation files')
+      chalk.blue('🚀 Run "npx envt generate" to create validation files')
     );
   } catch (error: unknown) {
     console.error(

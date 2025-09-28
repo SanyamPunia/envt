@@ -1,10 +1,10 @@
 {
-  "name": "env-safe-example",
+  "name": "envt-example",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "tsx app.ts",
-    "validate": "npx env-safe validate"
+    "validate": "npx envt validate"
   },
   "devDependencies": {
     "tsx": "^4.20.5"

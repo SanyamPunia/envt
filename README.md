@@ -1,4 +1,4 @@
-# env-safe
+# envt
 
 type-safe environment variables with runtime validation
 
@@ -8,10 +8,10 @@ eliminate `process.env.UNDEFINED_VAR` runtime errors and get compile-time safety
 
 ```bash
 # install globally
-npm install -g env-safe
+npm install -g envt
 
 # or use with npx
-npx env-safe init
+npx envt init
 ```
 
 ## basic usage
@@ -19,13 +19,13 @@ npx env-safe init
 1. **create config** - define your environment variables once
 
 ```bash
-npx env-safe init
+npx envt init
 ```
 
 2. **edit config** - customize your `env.config.ts`
 
 ```typescript
-import { EnvConfig } from "env-safe/types";
+import { EnvConfig } from "envt/types";
 
 export const config: EnvConfig = {
   DATABASE_URL: {
@@ -49,7 +49,7 @@ export const config: EnvConfig = {
 3. **generate validation** - create runtime validation + types
 
 ```bash
-npx env-safe generate
+npx envt generate
 ```
 
 4. **use in your app** - get type safety + runtime validation
@@ -68,10 +68,10 @@ console.log(env.NODE_ENV); // 'development' | 'production' | 'test'
 
 ## cli commands
 
-- `npx env-safe init` - create config template
-- `npx env-safe generate` - generate validation + types
-- `npx env-safe validate` - validate current environment
-- `npx env-safe check` - show environment status
+- `npx envt init` - create config template
+- `npx envt generate` - generate validation + types
+- `npx envt validate` - validate current environment
+- `npx envt check` - show environment status
 
 ## supported types
 

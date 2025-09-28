@@ -8,7 +8,7 @@ export function validateCommand(): void {
   if (!fileExists("env-validation.js")) {
     console.error(
       chalk.red(
-        '❌ env-validation.js not found. Run "npx env-safe generate" first.'
+        '❌ env-validation.js not found. Run "npx envt generate" first.'
       )
     );
     process.exit(1);

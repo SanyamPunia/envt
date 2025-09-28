@@ -19,7 +19,7 @@ export interface EnvConfigSchema {
  *
  * @example
  * ```typescript
- * import { EnvConfig } from 'env-safe/types';
+ * import { EnvConfig } from 'envt/types';
  *
  * export const config: EnvConfig = {
  *   DATABASE_URL: {
