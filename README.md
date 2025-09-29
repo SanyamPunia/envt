@@ -8,12 +8,27 @@ eliminate `process.env.UNDEFINED_VAR` runtime errors and get compile-time safety
 
 ## quick start
 
+### **Installation**
+
 ```bash
-# install globally
+# Option 1: Install locally (recommended)
+npm install envt
+
+# Option 2: Install globally
 npm install -g envt
 
-# or use with npx
+# Option 3: Use with npx (no installation needed)
 npx envt init
+```
+
+### **Setup**
+
+```bash
+# Initialize config
+npx envt init
+
+# Generate validation files
+npx envt generate
 ```
 
 ## basic usage
@@ -54,6 +69,44 @@ npx envt generate
 ```
 
 4. **use in your app** - get type safety + runtime validation
+
+### **Next.js Example (Recommended)**
+
+Create a `lib/env.ts` file to validate once and export:
+
+```typescript
+// lib/env.ts
+import { validateEnv } from "../env-validation.js";
+
+// Validate environment variables once at startup
+export const env = validateEnv();
+
+// Now you have type-safe access throughout your app
+export default env;
+```
+
+Use in your providers or components:
+
+```typescript
+// app/providers.tsx
+import { env } from '../lib/env';
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  // Environment is already validated and typed
+  console.log('API URL:', env.NEXT_PUBLIC_API_URL); // string
+  console.log('Debug mode:', env.NEXT_PUBLIC_DEBUG_MODE); // boolean
+  console.log('Environment:', env.NEXT_PUBLIC_NODE_ENV); // 'development' | 'production' | 'test'
+
+  return (
+    <div>
+      {/* Your providers */}
+      {children}
+    </div>
+  );
+}
+```
+
+### **Direct Usage**
 
 ```typescript
 import { validateEnv } from "./env-validation.js";
