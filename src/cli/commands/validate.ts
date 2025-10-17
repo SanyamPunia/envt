@@ -3,16 +3,20 @@ import { fileExists } from "../../core/file-manager";
 import chalk from "chalk";
 
 export function validateCommand(): void {
-  const validationPath = join(process.cwd(), "env-validation.js");
+  const hasJs = fileExists("env-validation.js");
+  const hasTs = fileExists("env-validation.ts");
 
-  if (!fileExists("env-validation.js")) {
+  if (!hasJs && !hasTs) {
     console.error(
       chalk.red(
-        '❌ env-validation.js not found. Run "npx envt generate" first.'
+        '❌ env-validation.js or env-validation.ts not found. Run "npx envt generate" first.'
       )
     );
     process.exit(1);
   }
+
+  const validationFile = hasJs ? "env-validation.js" : "env-validation.ts";
+  const validationPath = join(process.cwd(), validationFile);
 
   try {
     console.log(chalk.blue("🔍 Validating environment..."));
